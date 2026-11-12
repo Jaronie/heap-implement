@@ -40,4 +40,22 @@ public class Heap {
     private int leftChild(int index) { return items[getLeftChild(index)];}
     private int rightChild(int index) { return items[getRightChild(index)];}
     private int parent(int index) { return items[getParent(index)];}
+
+    private void ensureExtraCapacity() {
+
+    }
+
+    private void add(int item){
+
+    }
+
+    private void pop(int item){
+        
+    }
+
+    private void peek(int item){
+        
+    }
+
+
 }
