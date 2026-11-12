@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
@@ -29,6 +30,11 @@ public class Heap {
 
     int[] items = new int[capacity]; // backing list
 
+    public Heap(int capacity){
+        this.capacity = capacity;
+        this.heap = new int[capacity];
+        this.size = 0;
+    }
     /* Helper Methods */
     private int getLeftChild(int parentIndex) { return 2 * parentIndex + 1; }
     private int getRightChild(int parentIndex) { return 2 * parentIndex + 2; }
@@ -87,7 +93,7 @@ public class Heap {
 
     }
 
-    private void add(int item){
+    public void add(int item){
         ensureExtraCapacity();
         items[size] = item;
         size++;
@@ -95,7 +101,7 @@ public class Heap {
 
     }
 
-    private void pop(){
+    public void pop(){
         if(size == 0) throw new NoSuchElementException();
         int item = items[0];
         items[0] = items[size - 1];
@@ -105,17 +111,17 @@ public class Heap {
 
     }
 
-    private int peek(int item){
+    public int peek(int item){
         if(size == 0) throw new IllegalStateException();
         return items[0];
         
     }
 
-    private int size(){
+    public int size(){
         return size;
     }
 
-    private boolean isEmpty(){
+    public boolean isEmpty(){
         return size != 0;
     }
 
