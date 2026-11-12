@@ -28,11 +28,10 @@ public class Heap {
     private int capacity = 10;
     private int size = 0;
 
-    int[] items = new int[capacity]; // backing list
 
     public Heap(int capacity){
         this.capacity = capacity;
-        this.heap = new int[capacity];
+        this.heap = new int[capacity]; //backing list
         this.size = 0;
     }
     /* Helper Methods */
