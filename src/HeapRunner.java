@@ -21,6 +21,17 @@ public class HeapRunner {
         Scanner scanner = new Scanner(System.in);
 
         // TODO: Construct your Heap here.
+        Heap heap = new Heap(10);
+        heap.add(1);
+        heap.add(2);
+        heap.add(3);
+        heap.add(4);
+        heap.add(5);
+        heap.add(6);
+        heap.add(7);
+        heap.add(8);
+        heap.add(9);
+        heap.add(10);
 
         System.out.println("=== Heap Tester ===");
 
@@ -39,23 +50,29 @@ public class HeapRunner {
                     continue;
                 }
  
-                // TODO: Call your "add" method on the heap, passing in 'value'.
-                // TODO: Print message letting user know value was added
+                // Calling add
+                heap.add(value);
+
+                // Print message
+                System.out.println("Add has been called. Value " + value + " was added!");
  
             } else if (choice.equals("p") || choice.equals("pop")) {
-                // TODO: Call your "pop" method and print the result.
-                // Properly handle the case of an empty heap!
+                // Call pop
+                heap.pop();
+                // Print result
+                System.out.println(heap.pop());
 
             } else if (choice.equals("k") || choice.equals("peek")) {
                 // TODO: Call your "peek" method and print the result
                 // Properly handle the case of an empty heap!
 
             } else if (choice.equals("s") || choice.equals("size")) {
-                // TODO: Call your "size" method and print the result
+                // Call peek() and print result
+                System.out.println(heap.peek());
 
             } else if (choice.equals("e") || choice.equals("empty")) {
-                // TODO: Call your "isEmpty" method and print the result
-
+                // Call isEmpty() and prints result
+                System.out.println(heap.isEmpty());
             } else if (choice.equals("q") || choice.equals("quit")) {
                 break;
 
