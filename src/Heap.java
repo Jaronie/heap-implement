@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /**
  * A min-heap. 
  * 
@@ -78,20 +80,43 @@ public class Heap {
     private int parent(int index) { return items[getParent(index)];}
 
     private void ensureExtraCapacity() {
+        if(size == capacity) {
+            items = Arrays.copyOf(items, capacity * 2);
+            capacity *= 2;
+        }
 
     }
 
     private void add(int item){
+        ensureExtraCapacity();
+        items[size] = item;
+        size++;
+        shiftUp();
 
     }
 
-    private int pop(){
+    private void pop(){
+        if(size == 0) throw new NoSuchElementException();
+        int item = items[0];
+        items[0] = items[size - 1];
+        size--;
+        shiftDown();
         
-        
+
     }
 
     private int peek(int item){
+        if(size == 0) throw new IllegalStateException();
+        return items[0];
         
+    }
+
+    private int size(){
+        return size;
+    }
+
+    private boolean isEmpty(){
+        return size != 0;
     }
 
 
