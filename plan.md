@@ -3,8 +3,17 @@ After reviewing ` Heap.java ` and `HeapRunner.java `, my plan is to construct a 
 The methods I am considering implementing in ` Heap.java ` is as follows:
 
 ` Heap.java -- `
+* variables: 
+- capacity and size -- for upsizing possible list and tracking
+- items[] -- initial backing list
+
 * add -- adds a node to the heap 
 * pop -- pops the front of the heap
 * peek -- displays the front of the heap without removing it
 * size -- returns the amount of existing data in the heap
 * isEmpty -- returns a boolean result determining existence of values in heap
+* helper methods:
+- get and set parent - returns node values and/or sets
+- get and set children - returns node values and/or sets
+- has parent, has children -- checks for parent node or children
+
