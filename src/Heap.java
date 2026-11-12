@@ -36,6 +36,42 @@ public class Heap {
     private boolean hasRightChild(int index) { return getRightChild(index) < size;}
     private boolean hasParent(int index) { return getParent(index) >= 0; }
 
+    private void swap(int indexOne, int indexTwo){ // swap method used for shifting nodes when deleting/adding
+        int temp = items[indexOne];
+        items[indexOne] = items [indexTwo];
+        items[indexTwo] = temp;
+    }
+
+    private void shiftUp(){
+        int index = size - 1;
+        while(hasParent(index) && parent(index) > items[index]) {
+            swap(getParentIndex(index), index);
+            index = getParentIndex(index);
+        }
+
+    }
+
+    private void shiftDown(){
+        int index = 0;
+        while(hasLeftChild(index)) {
+            int smallChild = getLeftChild(index);
+            if (hasRightChild(index) && getRightChild(index) < getLeftChild(index)) {
+                smallChild = getRightChild(index);
+            }
+
+            if(items[index] < items[smallChild]){
+                break;
+            } else {
+                swap(index, smallChild);
+
+            }
+            index = smallChild;
+        }
+
+        
+    }
+
+
 
     private int leftChild(int index) { return items[getLeftChild(index)];}
     private int rightChild(int index) { return items[getRightChild(index)];}
@@ -49,13 +85,15 @@ public class Heap {
 
     }
 
-    private void pop(int item){
+    private int pop(){
+        
         
     }
 
-    private void peek(int item){
+    private int peek(int item){
         
     }
+
 
 
 }
