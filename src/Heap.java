@@ -53,8 +53,8 @@ public class Heap {
     private void shiftUp(){
         int index = size - 1;
         while(hasParent(index) && parent(index) > items[index]) {
-            swap(getParentIndex(index), index);
-            index = getParentIndex(index);
+            swap(getParent(index), index);
+            index = getParent(index);
         }
 
     }
@@ -111,7 +111,7 @@ public class Heap {
 
     }
 
-    public int peek(int item){
+    public int peek(){
         if(size == 0) throw new IllegalStateException();
         return items[0];
         
