@@ -14,11 +14,12 @@ public class HeapTest {
     - isEmpty() */
 
     // Heap Reference
-    Heap heap = new Heap(10);
+    Heap heap = new Heap();
 
     @Test
     void testAddNode() {
         int nums[] = {10, 20};
+        heap.add(10);
         heap.add(20);
         assertEquals(nums, heap);
     }

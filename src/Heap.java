@@ -25,14 +25,10 @@ import java.util.NoSuchElementException;
  * - hold private instance variables
  */
 public class Heap {
-    private ArrayList<Integer> heap;
-    private int capacity;
-    private int size;
+    private final ArrayList<Integer> heap;
 
-    public Heap(int capacity) {
-        this.capacity = capacity;
+    public Heap() {
         heap = new ArrayList<>(); // backing list
-        this.size = 0;
     }
 
     /* Helper Methods */
@@ -48,9 +44,17 @@ public class Heap {
         return (childIndex - 1) / 2;
     }
 
-    private boolean hasLeftChild(int index) { return getLeftChild(index) < size; }
-    private boolean hasRightChild(int index) { return getRightChild(index) < size;}
-    private boolean hasParent(int index) { return getParent(index) >= 0; }
+    private boolean hasLeftChild(int index) {
+        return getLeftChildIndex(index) < heap.size();
+    }
+
+    private boolean hasRightChild(int index) {
+        return getRightChildIndex(index) < heap.size();
+    }
+
+    private boolean hasParent(int index) {
+        return index >= 0;
+    }
 
     private void swap(int indexOne, int indexTwo) { // swap method used for shifting nodes when deleting/adding
         int temp = heap.get(indexOne);
@@ -71,7 +75,7 @@ public class Heap {
     }
 
     private void shiftUp() {
-        int index = size - 1;
+        int index = heap.size() - 1;
         while (hasParent(index) && parent(index) > heap.get(index)) {
             swap(getParentIndex(index), index);
             index = getParentIndex(index);
@@ -82,8 +86,8 @@ public class Heap {
     private void shiftDown() {
         int index = 0;
         while (hasLeftChild(index)) {
-            int smallChild = getLeftChild(index);
-            if (hasRightChild(index) && getRightChildIndex(index) < getLeftChildIndex(index)) {
+            int smallChild = getLeftChildIndex(index);
+            if (hasRightChild(index) && rightChild(index) < leftChild(index)) {
                 smallChild = getRightChildIndex(index);
             }
 
@@ -98,27 +102,30 @@ public class Heap {
 
     }
 
-
     public void add(int item) {
-        heap.set(size, item);
-        size++;
+        heap.add(item);
         shiftUp();
 
     }
 
-    public void pop() {
-        if (size == 0)
+    public int pop() {
+        if (heap.isEmpty())
             throw new NoSuchElementException();
-        int item = heap.get(0);
-        item = heap.get(size - 1);
-        size--;
-        shiftDown();
+        int lastIdx = heap.size() - 1;
+        int removedVal = heap.get(0);
+        heap.set(0, heap.get(lastIdx));
+        heap.remove(lastIdx);
+        if (!heap.isEmpty()) {
+            shiftDown();
+        }
+
+        return removedVal;
 
     }
 
     public int peek() {
-        if (size == 0)
-            throw new IllegalStateException();
+        if (heap.isEmpty())
+            throw new NoSuchElementException();
         return heap.get(0);
 
     }
@@ -128,7 +135,7 @@ public class Heap {
     }
 
     public boolean isEmpty() {
-        return size != 0;
+        return heap.size() == 0;
     }
 
 }

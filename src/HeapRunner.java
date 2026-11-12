@@ -21,7 +21,7 @@ public class HeapRunner {
         Scanner scanner = new Scanner(System.in);
 
         // TODO: Construct your Heap here.
-        Heap heap = new Heap(10);
+        Heap heap = new Heap();
         heap.add(1);
         heap.add(2);
         heap.add(3);
@@ -57,10 +57,9 @@ public class HeapRunner {
                 System.out.println("Add has been called. Value " + value + " was added!");
  
             } else if (choice.equals("p") || choice.equals("pop")) {
-                // Call pop
-                heap.pop();
-                // Print result
+                // Call pop / print pop()
                 System.out.println(heap.pop());
+                
 
             } else if (choice.equals("k") || choice.equals("peek")) {
                 // TODO: Call your "peek" method and print the result
