@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
@@ -25,13 +25,13 @@ import java.util.NoSuchElementException;
  * - hold private instance variables
  */
 public class Heap {
-    private ArrayList<> heap;
+    private ArrayList<Integer> heap;
     private int capacity;
     private int size;
 
     public Heap(int capacity) {
         this.capacity = capacity;
-        this.heap = new ArrayList<>(); // backing list
+        heap = new ArrayList<>(); // backing list
         this.size = 0;
     }
 
@@ -48,39 +48,31 @@ public class Heap {
         return (childIndex - 1) / 2;
     }
 
-    private boolean hasLeftChild(int index) {
-        return getLeftChildIndex(index) < size;
-    }
-
-    private boolean hasRightChild(int index) {
-        return getRightChildIndex(index) < size;
-    }
-
-    private boolean hasParent(int index) {
-        return getParentIndex(index) >= 0;
-    }
+    private boolean hasLeftChild(int index) { return getLeftChild(index) < size; }
+    private boolean hasRightChild(int index) { return getRightChild(index) < size;}
+    private boolean hasParent(int index) { return getParent(index) >= 0; }
 
     private void swap(int indexOne, int indexTwo) { // swap method used for shifting nodes when deleting/adding
-        int temp = items[indexOne];
-        items[indexOne] = items[indexTwo];
-        items[indexTwo] = temp;
+        int temp = heap.get(indexOne);
+        heap.set(indexOne, heap.get(indexTwo));
+        heap.set(indexTwo, temp);
     }
 
     private int leftChild(int index) {
-        return items[getLeftChildIndex(index)];
+        return heap.get(getLeftChildIndex(index));
     }
 
     private int rightChild(int index) {
-        return items[getRightChildIndex(index)];
+        return heap.get(getRightChildIndex(index));
     }
 
     private int parent(int index) {
-        return items[getParentIndex(index)];
+        return heap.get(getParentIndex(index));
     }
 
     private void shiftUp() {
         int index = size - 1;
-        while (hasParent(index) && parent(index) > items[index]) {
+        while (hasParent(index) && parent(index) > heap.get(index)) {
             swap(getParentIndex(index), index);
             index = getParentIndex(index);
         }
@@ -95,7 +87,7 @@ public class Heap {
                 smallChild = getRightChildIndex(index);
             }
 
-            if (items[index] < items[smallChild]) {
+            if (heap.get(index) < heap.get(smallChild)) {
                 break;
             } else {
                 swap(index, smallChild);
@@ -106,8 +98,9 @@ public class Heap {
 
     }
 
+
     public void add(int item) {
-        items[size] = item;
+        heap.set(size, item);
         size++;
         shiftUp();
 
@@ -116,8 +109,8 @@ public class Heap {
     public void pop() {
         if (size == 0)
             throw new NoSuchElementException();
-        int item = items[0];
-        items[0] = items[size - 1];
+        int item = heap.get(0);
+        item = heap.get(size - 1);
         size--;
         shiftDown();
 
@@ -126,12 +119,12 @@ public class Heap {
     public int peek() {
         if (size == 0)
             throw new IllegalStateException();
-        return items[0];
+        return heap.get(0);
 
     }
 
     public int size() {
-        return size;
+        return heap.size();
     }
 
     public boolean isEmpty() {
