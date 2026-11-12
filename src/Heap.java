@@ -22,6 +22,22 @@
  *  - hold private instance variables
  */
 public class Heap {
-    private
+    private int capacity = 10;
+    private int size = 0;
 
+    int[] items = new int[capacity]; // backing list
+
+    /* Helper Methods */
+    private int getLeftChild(int parentIndex) { return 2 * parentIndex + 1; }
+    private int getRightChild(int parentIndex) { return 2 * parentIndex + 2; }
+    private int getParent(int childIndex) { return (childIndex - 1) / 2;}
+
+    private boolean hasLeftChild(int index) { return getLeftChild(index) < size; }
+    private boolean hasRightChild(int index) { return getRightChild(index) < size;}
+    private boolean hasParent(int index) { return getParent(index) >= 0; }
+
+
+    private int leftChild(int index) { return items[getLeftChild(index)];}
+    private int rightChild(int index) { return items[getRightChild(index)];}
+    private int parent(int index) { return items[getParent(index)];}
 }
